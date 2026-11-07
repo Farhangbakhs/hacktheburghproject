@@ -1,0 +1,43 @@
+# OS / editor
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+
+# Vivado / HLS build output (regenerate with the tcl scripts)
+hw/vivado/build/
+hw/hls/**/solution*/
+hw/hls/*_prj/
+*.jou
+*.log
+*.str
+.Xil/
+hs_err_pid*.log
+
+# Vivado-on-Silicon-Mac container: keep the scripts, ignore the 37 GB install and runtime state
+hw/vivado-docker/Xilinx/
+hw/vivado-docker/.cache/
+hw/vivado-docker/.config/
+hw/vivado-docker/.dbus/
+hw/vivado-docker/.java/
+hw/vivado-docker/.local/
+hw/vivado-docker/.vnc/
+hw/vivado-docker/.Xilinx/
+hw/vivado-docker/.Xil/
+hw/vivado-docker/.Xauthority
+hw/vivado-docker/.digilent_dvctbl.txt
+hw/vivado-docker/.bash_history
+hw/vivado-docker/.viminfo
+hw/vivado-docker/.xsession-errors
+hw/vivado-docker/.sudo_as_admin_successful
+hw/vivado-docker/board_files/
+# Vivado installers (huge)
+hw/vivado-docker/*.tar.gz
+hw/vivado-docker/*.bin
+hw/vivado-docker/Xilinx_Unified*/
+
+
+# Vivado scratch
+hw/vivado/error.txt
+hw/vivado/NA/
+*.o
