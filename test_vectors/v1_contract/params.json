@@ -1,0 +1,36 @@
+{
+  "w": 160,
+  "h": 120,
+  "r_hi": 22427,
+  "r_lo": 10457,
+  "alpha": 12800,
+  "N": 300,
+  "init_frames": [
+    0
+  ],
+  "state_frames": 4,
+  "fs": 30.0,
+  "fc_hi": 2.0,
+  "fc_lo": 0.83,
+  "alpha_float": 50.0,
+  "source": "brightroom.npz frames 0..299, pyrDown to 160x120",
+  "layout": {
+    "input_frames.bin": "N*h*w little-endian uint32 words; byte0=B byte1=G byte2=R byte3=0 (uint8)",
+    "expected_output.bin": "N*h*w words; byte0=B byte1=G byte2=R (int8 two's complement), byte3=0",
+    "expected_state.bin": "state_frames x [L_hi, L_lo], each h*w*3 int32 LE (Q16.16), pixel-interleaved B,G,R, row-major; state AFTER that frame",
+    "order": "frame-major, then row-major pixels",
+    "init": "frames listed in init_frames are sent with init=1; their output is all zeros"
+  },
+  "contract": "docs/PLAN.md section 3 (bit-exact)",
+  "stats": {
+    "nonzero_output_fraction": 0.8296523726851852,
+    "clipped_fraction": 0.0007052083333333333,
+    "output_min": -127,
+    "output_max": 127
+  },
+  "sha256": {
+    "input_frames.bin": "7126e595c9f38090c2bb09ebb56fa38ce946e8be3c07a9225aa4420a1751e75e",
+    "expected_output.bin": "61f252f5d4ed3ed869936997e7f2943d378205fe89b54ded591a912861d38042",
+    "expected_state.bin": "874f8f71031b762ff70baf3d2d698b97005792e0791246abfa5227c1839317ea"
+  }
+}
