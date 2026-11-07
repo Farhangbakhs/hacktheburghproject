@@ -1,0 +1,3 @@
+# > 5 MB: fetch with download_models.py instead of committing
+lbfmodel.yaml
+*.part
