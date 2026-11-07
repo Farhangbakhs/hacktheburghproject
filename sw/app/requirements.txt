@@ -1,0 +1,4 @@
+# Laptop app. OpenCV 5.x removed CascadeClassifier (face detector), so stay on 4.x.
+numpy>=1.21
+opencv-python==4.14.0.94
+pytest
