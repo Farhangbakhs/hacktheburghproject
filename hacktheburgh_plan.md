@@ -4,11 +4,16 @@ Deadline: Sunday 12:00. Team of 3. One codebase, multiple tracks allowed.
 
 ## 1. Concept
 
-Camera-free sensing of players' stillness and motion with WiFi CSI on ESP32s, used as one input to a poker decision model. A phone camera reads cards so bluff/value labels are generated automatically.
+Camera-free sensing of players' stillness and motion with WiFi CSI on ESP32s,
+used as one input to a poker decision model. A phone camera reads cards so
+bluff/value labels are generated automatically.
 
-Honest framing: we measure arousal relative to each player's own baseline, not lies. We report accuracy against labels, including "near chance" if that is what we get.
+Honest framing: we measure arousal relative to each player's own baseline, not
+lies. We report accuracy against labels, including "near chance" if that is
+what we get.
 
-Tracks: HRT (predictions and decision making), G-Research (make the invisible visible), Bank of Scotland (energy-waste slide, presence detection, optional).
+Tracks: HRT (predictions and decision making), G-Research (make the invisible
+visible), Bank of Scotland (energy-waste slide, presence detection, optional).
 
 ## 2. Hardware
 
@@ -19,7 +24,8 @@ Tracks: HRT (predictions and decision making), G-Research (make the invisible vi
 Layout:
 
 - 1-2 DevKits wired to the laptop as CSI receivers (serial).
-- Remaining DevKits + camera boards are transmitters near each seat, powered by USB battery or charger.
+- Remaining DevKits + camera boards are transmitters near each seat, powered by
+  USB battery or charger.
 - Keep links short (2-3 m). One link per player.
 - Dedicated fixed WiFi channel, not the venue network.
 
@@ -31,33 +37,44 @@ ESP32 mesh -> CSI pipeline -> arousal signal (per player, vs baseline) --\
 Phone camera -> card reader (or manual entry) -> hand equity + labels ---/
 ```
 
-Decision model: standard poker odds, with a Bayesian update of bluff probability from the arousal signal.
+Decision model: standard poker odds, with a Bayesian update of bluff
+probability from the arousal signal.
 
 ## 4. First steps on the ESP32s
 
-Fastest path: Espressif's `esp-csi` repo supports all ESP32 series including the classic ESP32. Its get-started examples are:
+Fastest path: Espressif's `esp-csi` repo supports all ESP32 series including
+the classic ESP32. Its get-started examples are:
 
 - `csi_recv`: ESP32 as receiver
 - `csi_send`: ESP32 as sender
 - `csi_recv_router`: router sends, ESP32 pings it to get CSI
 - `tools/csi_data_read_parse.py`: CSI analysis script
 
-The repo's `esp-radar` `wifi_sensing_demo` also does motion and presence detection with on-site training and a browser Web Serial monitor. Check its README for classic ESP32 support. If it works, it is the quickest viability test.
+The repo's `esp-radar` `wifi_sensing_demo` also does motion and presence
+detection with on-site training and a browser Web Serial monitor. Check its
+README for classic ESP32 support. If it works, it is the quickest viability
+test.
 
 Steps:
 
-1. Install ESP-IDF on the laptop now (slow download; start in background). Follow the version the esp-csi README names.
+1. Install ESP-IDF on the laptop now (slow download; start in background).
+   Follow the version the esp-csi README names.
 2. Clone `https://github.com/espressif/esp-csi`.
-3. Set target to `esp32`, build and flash `csi_send` on one board and `csi_recv` on a DevKit. Use `idf.py -p <port> flash monitor`. Check the example README for channel/MAC config.
+3. Set target to `esp32`, build and flash `csi_send` on one board and
+   `csi_recv` on a DevKit. Use `idf.py -p <port> flash monitor`. Check the
+   example README for channel/MAC config.
 4. Confirm CSI lines stream over serial from the receiver. Save a capture to file.
 5. Run the three tests in section 5.
 6. Only after tests pass: add more transmitters, then the full pipeline.
 
-Camera boards: flash via the programmer module one at a time (GPIO0 to GND for boot mode if the module does not auto-reset). Power from battery afterwards. CSI does not need the camera running.
+Camera boards: flash via the programmer module one at a time (GPIO0 to GND for
+boot mode if the module does not auto-reset). Power from battery afterwards.
+CSI does not need the camera running.
 
 Parallel jobs while the above runs:
 
-- Person 3: manual card-entry UI + equity calc (`eval7` or `treys`), poker model skeleton, dashboard.
+- Person 3: manual card-entry UI + equity calc (`eval7` or `treys`), poker
+  model skeleton, dashboard.
 
 ## 5. Viability tests
 
@@ -83,13 +100,18 @@ If a test fails, try before giving up: different channel (1/6/11), shorter links
 
 Pivot options (same hardware):
 
-1. Card-vision poker analytics (equity, auto bluff labels, dashboard) as the main project.
-2. Microclimate and heating-cost project with temp/humidity sensors (Bank of Scotland).
+1. Card-vision poker analytics (equity, auto bluff labels, dashboard) as the
+   main project.
+2. Microclimate and heating-cost project with temp/humidity sensors (Bank of
+   Scotland).
 
 ## 7. Venue notes
 
-- Developing in a big atrium: crowds and 2.4 GHz congestion will add noise. Test breathing at quiet times.
-- Demo likely in a separate room: baselines and models are room-specific. Build a one-minute "empty room baseline" step into the demo and use baseline-relative thresholds.
+- Developing in a big atrium: crowds and 2.4 GHz congestion will add noise.
+  Test breathing at quiet times.
+- Demo likely in a separate room: baselines and models are room-specific. Build
+  a one-minute "empty room baseline" step into the demo and use baseline-relative
+  thresholds.
 - Ask organisers where judging happens and whether the room can be tested.
 - Record a fallback demo clip early.
 
@@ -97,8 +119,10 @@ Pivot options (same hardware):
 
 1. Must have: viability tests, CSI pipeline, live per-player trace.
 2. Should have: manual card entry, equity, bluff/value labels, evaluation.
-3. Nice to have: automatic card reading with a pretrained detector (verify a model exists early).
-4. Last: GSR sensor (two finger contacts, resistor, ESP32 ADC), energy-waste slide, Bayesian polish.
+3. Nice to have: automatic card reading with a pretrained detector (verify a
+   model exists early).
+4. Last: GSR sensor (two finger contacts, resistor, ESP32 ADC), energy-waste
+   slide, Bayesian polish.
 
 ## 9. Task split
 
@@ -116,4 +140,5 @@ Pivot options (same hardware):
 
 ## 11. Ethics
 
-Get consent from anyone sensed or filmed. Use the camera only for card reading and labelling.
+Get consent from anyone sensed or filmed. Use the camera only for card reading
+and labelling.
