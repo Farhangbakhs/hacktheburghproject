@@ -488,6 +488,13 @@ def load_presets(default_factory: Callable) -> dict[str, Callable]:
         presets["saracen_cpp_original"] = lambda p: make_saracen(p, levels=5, lambda_c=20.0, work_scale=0)
     except Exception as e:
         print(f"[dashboard] saracen C++ presets unavailable: {e}")
+    try:
+        from evm_fixed import FixedEVM
+        from evm_saracen_fixed import make_saracen_fixed
+        presets["fixed"] = FixedEVM                     # v1 contract, bit-exact (what the FPGA computes)
+        presets["saracen_fixed"] = make_saracen_fixed   # v2 proposal: laptop pre/post + bit-exact kernel
+    except Exception as e:
+        print(f"[dashboard] fixed-point presets unavailable: {e}")
     return presets
 
 

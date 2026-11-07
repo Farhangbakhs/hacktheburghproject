@@ -1,0 +1,60 @@
+{
+  "contract": "PROPOSED section 3 v2 (saracen Laplacian EVM) - see sw/reference/HANDOFF_JACK.md",
+  "r_hi": 65535,
+  "r_lo": 1,
+  "alpha_0": 65535,
+  "count_0": 19200,
+  "alpha_1": 32768,
+  "count_1": 4800,
+  "alpha_2": 256,
+  "count_2": 1200,
+  "alpha_3": 0,
+  "count_3": 0,
+  "total_words": 25200,
+  "N": 64,
+  "level_shapes_hw": [
+    [
+      120,
+      160
+    ],
+    [
+      60,
+      80
+    ],
+    [
+      30,
+      40
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "init_frames": [
+    0,
+    32
+  ],
+  "state_frames": 4,
+  "source": "synthetic stress words",
+  "note": "extreme registers, not physical",
+  "formats": {
+    "input": "int16 Q8.8 (value*256) in low 16 bits of 32-bit LE word, high 16 bits 0",
+    "output": "int16 Q8.8 in low 16 bits, high 16 bits 0; clipped to [-32767, 32767]",
+    "state": "int32 Q16.16, L_hi block then L_lo block per frame",
+    "r_hi/r_lo": "uint16 Q0.16",
+    "alpha_i": "uint16 Q8.8, gain for level i"
+  },
+  "stats": {
+    "input_min": -32767,
+    "input_max": 32767,
+    "output_min": -32767,
+    "output_max": 32767,
+    "nonzero_output_fraction": 0.71875,
+    "clipped_fraction": 0.5612338789682539
+  },
+  "sha256": {
+    "input_words.bin": "6af69c75e03e7af2419e0cdf50d7bf49e0346844042c96c8c3a3946cbff8fd71",
+    "expected_output.bin": "bdb60c6e8d1cacc47af2576b99b20b3ac759d2820fbb66403b308a631ebe51e6",
+    "expected_state.bin": "0088b5702e30d7cde14d38fb36bc9b68342df2df520f2dbcc6366f18771a3a22"
+  }
+}

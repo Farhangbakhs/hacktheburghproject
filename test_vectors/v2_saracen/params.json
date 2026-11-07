@@ -1,0 +1,69 @@
+{
+  "contract": "PROPOSED section 3 v2 (saracen Laplacian EVM) - see sw/reference/HANDOFF_JACK.md",
+  "r_hi": 26223,
+  "r_lo": 3343,
+  "alpha_0": 3968,
+  "count_0": 19200,
+  "alpha_1": 5120,
+  "count_1": 4800,
+  "alpha_2": 5120,
+  "count_2": 1200,
+  "alpha_3": 0,
+  "count_3": 0,
+  "total_words": 25200,
+  "N": 300,
+  "level_shapes_hw": [
+    [
+      120,
+      160
+    ],
+    [
+      60,
+      80
+    ],
+    [
+      30,
+      40
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "init_frames": [
+    0
+  ],
+  "state_frames": 4,
+  "fs": 30.0,
+  "fc_hi": 2.44,
+  "fc_lo": 0.25,
+  "alpha_float": 20.0,
+  "lambda_c": 40.0,
+  "exaggeration": 2.0,
+  "levels": 4,
+  "work_size_hw": [
+    240,
+    320
+  ],
+  "source": "brightroom.npz frames 0..299 (640x480 -> 320x240 Lab L-channel Laplacian)",
+  "formats": {
+    "input": "int16 Q8.8 (value*256) in low 16 bits of 32-bit LE word, high 16 bits 0",
+    "output": "int16 Q8.8 in low 16 bits, high 16 bits 0; clipped to [-32767, 32767]",
+    "state": "int32 Q16.16, L_hi block then L_lo block per frame",
+    "r_hi/r_lo": "uint16 Q0.16",
+    "alpha_i": "uint16 Q8.8, gain for level i"
+  },
+  "stats": {
+    "input_min": -5830,
+    "input_max": 10862,
+    "output_min": -32767,
+    "output_max": 32767,
+    "nonzero_output_fraction": 0.9929888888888889,
+    "clipped_fraction": 5.476190476190476e-05
+  },
+  "sha256": {
+    "input_words.bin": "cbd6c8b909b8cbc637ef8bac4053b8656a79960b4159e239cbf45f5c43ccc33a",
+    "expected_output.bin": "49c10fde0bcb23ceaf366ce490fe6030d7421db58d5234369322e929c37134ad",
+    "expected_state.bin": "c3b4762ca756c4e6f53572242e32504b343c81434384591921b236ead56e75a8"
+  }
+}

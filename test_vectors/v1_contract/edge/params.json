@@ -1,0 +1,35 @@
+{
+  "w": 160,
+  "h": 120,
+  "r_hi": 65535,
+  "r_lo": 1,
+  "alpha": 65535,
+  "N": 64,
+  "init_frames": [
+    0,
+    32
+  ],
+  "state_frames": 4,
+  "fs": 30.0,
+  "source": "edge_frames (synthetic stress patterns)",
+  "note": "extreme registers; not physically meaningful cutoffs",
+  "layout": {
+    "input_frames.bin": "N*h*w little-endian uint32 words; byte0=B byte1=G byte2=R byte3=0 (uint8)",
+    "expected_output.bin": "N*h*w words; byte0=B byte1=G byte2=R (int8 two's complement), byte3=0",
+    "expected_state.bin": "state_frames x [L_hi, L_lo], each h*w*3 int32 LE (Q16.16), pixel-interleaved B,G,R, row-major; state AFTER that frame",
+    "order": "frame-major, then row-major pixels",
+    "init": "frames listed in init_frames are sent with init=1; their output is all zeros"
+  },
+  "contract": "docs/PLAN.md section 3 (bit-exact)",
+  "stats": {
+    "nonzero_output_fraction": 0.6874245876736111,
+    "clipped_fraction": 0.5464241536458333,
+    "output_min": -127,
+    "output_max": 127
+  },
+  "sha256": {
+    "input_frames.bin": "e8e0ac1628e7392c9a0761cd09832e59d3c15c152eb52842ffa7b54e6bb20e93",
+    "expected_output.bin": "3c65eb56e3c2492a05a9cb70da147ab77e33a3ff192dfbbc58d22132ba4ce137",
+    "expected_state.bin": "a5561f2ce63ece5fc153e6ec50baaf098825619ab4f20824f9542a20c78c7fd1"
+  }
+}
