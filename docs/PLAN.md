@@ -177,4 +177,4 @@ No dependency on software for steps 1-2. Start immediately.
 - Give the agent this file plus your section. Ask it to implement exactly section 3; any deviation must be flagged.
 - Agents can't see the board, camera or screen. Paste real outputs, errors and reports back in.
 - Ask for tests first: fixed-point model vs float, HLS C-sim vs golden vectors, server round-trip with the mock.
-- Small commits, one shared repo. Don't edit someone else's directory without telling them.
+-
